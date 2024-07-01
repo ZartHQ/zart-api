@@ -17,16 +17,15 @@ export class AuthService {
     private jwt: JwtService,
     private config: ConfigService,
   ) {}
-  async signup(dto: SignupDto) {
+  async signup({ email, firstName, lastName, password }: SignupDto) {
     try {
-      const { email, firstName, lastName, password } = dto;
-      const hash = await argon.hash(password);
+      const passwordHash = await argon.hash(password);
       const user = await this.prisma.user.create({
         data: {
           firstName,
           lastName,
           email,
-          hash,
+          passwordHash,
         },
       });
       return this.signToken(user.id, user.email);
@@ -40,17 +39,17 @@ export class AuthService {
     }
   }
 
-  async signin(dto: SigninDto) {
+  async signin({ email, password }: SigninDto) {
     // Find the user by email
     const user = await this.prisma.user.findUnique({
       where: {
-        email: dto.email,
+        email: email,
       },
     });
     // If user doesn't exist, throw exception
     if (!user) throw new NotFoundException('Credentials incorrect');
     // Compare password
-    const validPassword = await argon.verify(user.hash, dto.password);
+    const validPassword = await argon.verify(user.passwordHash, password);
 
     // If password incorrect throw exception
     if (!validPassword) throw new NotFoundException('Credentials incorrect');

@@ -14,12 +14,11 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  firstName String
-  lastName  String
-  hash      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  id           String   @id @default(uuid())
+  email        String   @unique
+  firstName    String
+  lastName     String
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
