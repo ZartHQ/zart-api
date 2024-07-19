@@ -14,8 +14,8 @@ import { UserEntity } from './entities/users.entity';
 @Injectable()
 export class AuthService {
   constructor(
-    private jwt: JwtService,
-    private config: ConfigService,
+    private readonly jwt: JwtService,
+    private readonly config: ConfigService,
     @InjectRepository(UserEntity)
     private readonly userRepo: Repository<UserEntity>,
   ) {}
@@ -33,22 +33,19 @@ export class AuthService {
     }
   }
 
-  // async signIn(dto: SigninDto) {
-  //   // Find the user by email
-  //   const user = await this.prisma.user.findUnique({
-  //     where: {
-  //       email: dto.email,
-  //     },
-  //   });
-  //   // If user doesn't exist, throw exception
-  //   if (!user) throw new NotFoundException('Credentials incorrect');
-  //   // Compare password
-  //   const validPassword = await argon.verify(user.passwordHash, dto.password);
+  async signin({ email, password }: SigninDto) {
+    try {
+      const user = await this.userRepo.findOne({ where: { email } });
+      if (!user) throw new NotFoundException('Credentials incorrect');
 
-  //   // If password incorrect throw exception
-  //   if (!validPassword) throw new NotFoundException('Credentials incorrect');
-  //   return this.signToken(user.id, user.email);
-  // }
+      const validPassword = await argon.verify(user.password, password);
+      if (!validPassword) throw new NotFoundException('Credentials incorrect');
+      console.log(user);
+      return this.signToken(user.id, user.email);
+    } catch (e) {
+      throw e;
+    }
+  }
 
   async signToken(
     userId: string,
@@ -58,11 +55,10 @@ export class AuthService {
       sub: userId,
       email,
     };
-    const token = await this.jwt.sign(payload, {
-      expiresIn: '60m',
+    const token = await this.jwt.signAsync(payload, {
+      expiresIn: '10m',
       secret: this.config.get('JWT_SECRET'),
     });
-
     return {
       access_token: token,
     };

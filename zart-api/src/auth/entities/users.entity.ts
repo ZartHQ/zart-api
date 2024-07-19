@@ -8,8 +8,11 @@ export class UserEntity extends AbstractEntity {
   @Column({ unique: true })
   email: string;
 
-  @Column({ unique: true })
-  username: string;
+  @Column()
+  firstNme: string;
+
+  @Column()
+  lastNme: string;
 
   @Column({ default: null, nullable: true })
   image: string | null;
