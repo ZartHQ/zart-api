@@ -9,10 +9,10 @@ export class UserEntity extends AbstractEntity {
   email: string;
 
   @Column()
-  firstNme: string;
+  firstName: string;
 
   @Column()
-  lastNme: string;
+  lastName: string;
 
   @Column({ default: null, nullable: true })
   image: string | null;
