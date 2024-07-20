@@ -9,6 +9,9 @@ export class UserEntity extends AbstractEntity {
   email: string;
 
   @Column()
+  phoneNum: string;
+
+  @Column()
   firstName: string;
 
   @Column()
