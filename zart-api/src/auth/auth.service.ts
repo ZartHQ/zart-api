@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ConflictException,
   Injectable,
   NotFoundException,
@@ -22,6 +23,9 @@ export class AuthService {
 
   async signup(dto: SignupDto) {
     try {
+      if (dto.password !== dto.confirmPassword) {
+        throw new BadRequestException('Passwords do not match!');
+      }
       const user = this.userRepo.create(dto);
       await user.save();
       return this.signToken(user.id, user.email);

@@ -9,7 +9,7 @@ export class UserEntity extends AbstractEntity {
   email: string;
 
   @Column()
-  phoneNum: string;
+  phone: string;
 
   @Column()
   firstName: string;

@@ -3,7 +3,7 @@ import {
   IsNotEmpty,
   IsPhoneNumber,
   IsStrongPassword,
-} from 'class-validator';
+  } from 'class-validator';
 
 export class SignupDto {
   @IsNotEmpty()
@@ -18,9 +18,12 @@ export class SignupDto {
 
   @IsNotEmpty()
   @IsPhoneNumber('NG')
-  phoneNum: string;
+  phone: string;
 
   @IsNotEmpty()
   @IsStrongPassword()
-  password: string;
+  password: string
+
+  @IsNotEmpty()
+  confirmPassword: string
 }
