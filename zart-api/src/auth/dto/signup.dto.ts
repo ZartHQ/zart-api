@@ -1,4 +1,9 @@
-import { IsEmail, IsNotEmpty, IsStrongPassword } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsPhoneNumber,
+  IsStrongPassword,
+  } from 'class-validator';
 
 export class SignupDto {
   @IsNotEmpty()
@@ -12,6 +17,13 @@ export class SignupDto {
   email: string;
 
   @IsNotEmpty()
+  @IsPhoneNumber('NG')
+  phone: string;
+
+  @IsNotEmpty()
   @IsStrongPassword()
-  password: string;
+  password: string
+
+  @IsNotEmpty()
+  confirmPassword: string
 }
