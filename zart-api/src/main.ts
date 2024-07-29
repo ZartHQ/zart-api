@@ -4,13 +4,13 @@ import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix('/v1/api');
+  app.setGlobalPrefix('/v1');
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
     }),
   );
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
-  await app.listen(3000);
+  await app.listen(3010);
 }
 bootstrap();

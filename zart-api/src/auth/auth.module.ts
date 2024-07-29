@@ -6,10 +6,13 @@ import { jwtStrategy } from './strategy';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from './entities/users.entity';
+import { GoogleStrategy } from './strategy/google.strategy';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  providers: [AuthService, jwtStrategy],
+  providers: [AuthService, jwtStrategy, GoogleStrategy],
   imports: [
+    ConfigModule,
     JwtModule.register({
       global: true,
     }),
