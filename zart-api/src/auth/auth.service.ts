@@ -27,7 +27,7 @@ export class AuthService {
         throw new BadRequestException('Passwords do not match!');
       }
       const user = this.userRepo.create(dto);
-      await user.save();
+        await this.userRepo.save(user);
       return this.signToken(user.id, user.email);
     } catch (e) {
       if (e.code === '23505') {
@@ -41,10 +41,8 @@ export class AuthService {
     try {
       const user = await this.userRepo.findOne({ where: { email } });
       if (!user) throw new NotFoundException('Credentials incorrect');
-
       const validPassword = await argon.verify(user.password, password);
       if (!validPassword) throw new NotFoundException('Credentials incorrect');
-      console.log(user);
       return this.signToken(user.id, user.email);
     } catch (e) {
       throw e;
