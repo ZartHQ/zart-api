@@ -115,10 +115,10 @@ export class AuthService {
    * @returns refreshToken
    */
   async refreshToken(
-    refreshToken: string,
+    token: string,
   ): Promise<{ access_token: string; refresh_token: string }> {
     try {
-      const payload = await this.jwt.verifyAsync(refreshToken, {
+      const payload = await this.jwt.verifyAsync(token, {
         secret: this.config.get('JWT_REFRESH_SECRET'),
       });
 
