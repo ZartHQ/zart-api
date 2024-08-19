@@ -9,8 +9,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { SignupDto, SigninDto } from './dto';
 import { AuthGuard } from '@nestjs/passport';
+import { SigninDto, SignupDto } from 'src/dto';
 
 @Controller('auth')
 export class AuthController {
