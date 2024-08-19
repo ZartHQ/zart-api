@@ -2,12 +2,12 @@ import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './auth.controller';
-import { jwtStrategy } from './strategy';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserEntity } from './entities/users.entity';
-import { GoogleStrategy } from './strategy/google.strategy';
 import { ConfigModule } from '@nestjs/config';
+import { jwtStrategy } from 'src/strategy';
+import { UserEntity } from 'src/entities/users.entity';
+import { GoogleStrategy } from 'src/strategy/google.strategy';
 
 @Module({
   providers: [AuthService, jwtStrategy, GoogleStrategy],
