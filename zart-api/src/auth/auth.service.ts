@@ -1,6 +1,5 @@
 import {
   BadRequestException,
-  ConflictException,
   Injectable,
   NotFoundException,
   UnauthorizedException,
@@ -50,7 +49,7 @@ export class AuthService {
   }
 
   /**
-   * 
+   *
    * @param profile (google user profile)
    * @returns user details
    */
@@ -80,13 +79,14 @@ export class AuthService {
   }
 
   /**
-   * 
-   * @param userId 
-   * @param email 
-   * @returns {accessToken, refreshToken} 
+   *
+   * @param userId
+   * @param email
+   * @returns {accessToken, refreshToken}
    */
+
   async signToken(
-    userId: string,
+    userId: number,
     email: string,
   ): Promise<{ access_token: string; refresh_token: string }> {
     const payload = {
@@ -110,8 +110,8 @@ export class AuthService {
   }
 
   /**
-   * 
-   * @param refreshToken 
+   *
+   * @param refreshToken
    * @returns refreshToken
    */
   async refreshToken(
