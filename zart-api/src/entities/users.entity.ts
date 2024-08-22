@@ -8,7 +8,7 @@ export class UserEntity extends AbstractEntity {
   @Column({ unique: true })
   email: string;
 
-  @Column()
+  @Column({ nullable: true })
   phone: string;
 
   @Column()
@@ -20,12 +20,10 @@ export class UserEntity extends AbstractEntity {
   @Column({ default: null, nullable: true })
   image: string | null;
 
-  @Column()
+  @Column({ nullable: true })
   @Exclude() // Add { toPlainOnly: true } if you want to work with the password
   password: string;
 
-  @BeforeInsert()
-  async hashedPassword() {
-    this.password = await argon.hash(this.password);
-  }
+  @Column({ nullable: true })
+  googleId?: string;
 }
