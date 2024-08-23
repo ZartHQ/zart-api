@@ -47,7 +47,7 @@ export class AuthService {
       throw e;
     }
   }
-
+  
   /**
    *
    * @param profile (google user profile)

@@ -25,14 +25,23 @@ export class LocationsService {
     return await this.locationRepo.find();
   }
 
-  async findByArea(area: string) {
-    const result = await this.locationRepo.findOne({ where: { area } });
+  async findByCity(city: string) {
+    const result = await this.locationRepo.findOne({ where: { city } });
     if (!result) throw new NotFoundException('Location not found!');
     return result;
   }
 
-  async update(id: string, dto: updateLocationsDto) {
+  //findById
+  async updateById(id: number, dto: updateLocationsDto) {
     const result = await this.locationRepo.update(id, dto);
+
+    if (result.affected === 0) {
+      throw new NotFoundException('Location not found!');
+    }
     return { status: 'success', result };
   }
+
+  //updateByCity
+
+  //Delete
 }

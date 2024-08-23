@@ -3,7 +3,7 @@ import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
 export class createLocationsDto {
   @IsString()
   @IsNotEmpty()
-  area: string;
+  city: string;
 
   @IsBoolean()
   @IsNotEmpty()

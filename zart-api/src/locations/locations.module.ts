@@ -9,15 +9,4 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   controllers: [LocationsController],
   imports: [TypeOrmModule.forFeature([LocationEntity])],
 })
-export class LocationsModule implements OnModuleInit {
-  constructor(private readonly locationsService: LocationsService) {}
-  async onModuleInit() {
-    const initialLocations = [
-      { area: 'surulere', active: true },
-      { area: 'ikeja', active: true },
-    ];
-    for (const location of initialLocations) {
-      await this.locationsService.create(location);
-    }
-  }
-}
+export class LocationsModule {}

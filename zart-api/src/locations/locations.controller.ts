@@ -3,7 +3,7 @@ import {
   Controller,
   Get,
   Param,
-  ParseUUIDPipe,
+  ParseIntPipe,
   Patch,
   Post,
 } from '@nestjs/common';
@@ -29,18 +29,18 @@ export class LocationsController {
   }
 
   @Get(':area')
-  findByArea(@Param('area') areaParam: string): Promise<LocationEntity> {
-    const area = this.locationService.findByArea(areaParam);
+  findByCity(@Param('area') areaParam: string): Promise<LocationEntity> {
+    const area = this.locationService.findByCity(areaParam);
     return area;
   }
   // Get By Id
 
-  @Patch(':uuid')
-  update(
-    @Param('uuid', new ParseUUIDPipe()) uuid: string,
+  @Patch(':id')
+  updateById(
+    @Param('id', ParseIntPipe) id: number,
     @Body() dto: updateLocationsDto,
   ) {
-    const result = this.locationService.update(uuid, dto);
+    const result = this.locationService.updateById(id, dto);
     return result;
   }
   // Patch By Area
