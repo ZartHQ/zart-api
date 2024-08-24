@@ -8,9 +8,9 @@ import {
   Post,
 } from '@nestjs/common';
 import { LocationsService } from './locations.service';
-import { createLocationsDto } from './dto';
-import { LocationEntity } from './locations.entity';
-import { updateLocationsDto } from './dto/updateLocations.dto';
+import { createLocationsDto } from 'src/dto';
+import { LocationEntity } from '../entities/locations.entity';
+import { updateLocationsDto } from 'src/dto';
 
 @Controller('locations')
 export class LocationsController {
