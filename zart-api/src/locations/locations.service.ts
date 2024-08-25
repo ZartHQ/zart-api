@@ -1,5 +1,7 @@
 import {
   BadRequestException,
+  HttpException,
+  HttpStatus,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -22,26 +24,33 @@ export class LocationsService {
   }
 
   async findAll(): Promise<LocationEntity[]> {
-    return await this.locationRepo.find();
+    const data = await this.locationRepo.find();
+    if (data.length === 0) {
+      throw new HttpException('No Content!', HttpStatus.NO_CONTENT);
+    }
+    return data;
   }
 
   async findByCity(city: string) {
-    const result = await this.locationRepo.findOne({ where: { city } });
-    if (!result) throw new NotFoundException('Location not found!');
-    return result;
+    const data = await this.locationRepo.find({ where: { city } });
+    if (data.length === 0) throw new NotFoundException('No city found!');
+    return data;
   }
 
-  //findById
-  async updateById(id: number, dto: updateLocationsDto) {
-    const result = await this.locationRepo.update(id, dto);
+  async update(id: number, dto: updateLocationsDto) {
+    const data = await this.locationRepo.update(id, dto);
 
-    if (result.affected === 0) {
+    if (data.affected === 0) {
       throw new NotFoundException('Location not found!');
     }
-    return { status: 'success', result };
+    return { status: 'success', data };
   }
 
-  //updateByCity
-
-  //Delete
+  async delete(id: number) {
+    const data = await this.locationRepo.delete(id);
+    if (data.affected === 0) {
+      throw new NotFoundException('Location not found!');
+    }
+    return { status: 'success' };
+  }
 }

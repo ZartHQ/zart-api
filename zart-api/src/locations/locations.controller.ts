@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -18,30 +19,33 @@ export class LocationsController {
 
   @Post()
   create(@Body() dto: createLocationsDto): Promise<LocationEntity> {
-    const location = this.locationService.create(dto);
-    return location;
+    const data = this.locationService.create(dto);
+    return data;
+  }
+
+  @Get(':city')
+  find(@Param('city') city: string) {
+    const data = this.locationService.findByCity(city);
+    return data;
   }
 
   @Get()
   findAll(): Promise<LocationEntity[]> {
-    const locations = this.locationService.findAll();
-    return locations;
+    const data = this.locationService.findAll();
+    return data;
   }
-
-  @Get(':area')
-  findByCity(@Param('area') areaParam: string): Promise<LocationEntity> {
-    const area = this.locationService.findByCity(areaParam);
-    return area;
-  }
-  // Get By Id
 
   @Patch(':id')
-  updateById(
+  update(
     @Param('id', ParseIntPipe) id: number,
     @Body() dto: updateLocationsDto,
   ) {
-    const result = this.locationService.updateById(id, dto);
-    return result;
+    const data = this.locationService.update(id, dto);
+    return data;
   }
-  // Patch By Area
+
+  @Delete(':id')
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.locationService.delete(id);
+  }
 }
