@@ -43,7 +43,7 @@ export class LocationsService {
     if (data.affected === 0) {
       throw new NotFoundException('Location not found!');
     }
-    return { status: 'success', data };
+    return data
   }
 
   async delete(id: number) {

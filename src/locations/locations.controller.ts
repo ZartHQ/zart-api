@@ -40,8 +40,8 @@ export class LocationsController {
     @Param('id', ParseIntPipe) id: number,
     @Body() dto: updateLocationsDto,
   ) {
-    const data = this.locationService.update(id, dto);
-    return data;
+    this.locationService.update(id, dto);
+    return { status: `Successfuly updated city: ${dto.city}` };
   }
 
   @Delete(':id')
