@@ -38,7 +38,7 @@ export class LocationsController {
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() dto: updateLocationsDto,
+    @Body()  dto: updateLocationsDto,
   ) {
     this.locationService.update(id, dto);
     return { status: `Successfuly updated city: ${dto.city}` };
