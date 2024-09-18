@@ -1,6 +1,7 @@
-import { Column, Entity } from 'typeorm';
+import { BeforeInsert, Column, Entity } from 'typeorm';
 import { AbstractEntity } from './abstract-entity';
 import { Exclude } from 'class-transformer';
+import * as argon from 'argon2';
 
 @Entity()
 export class UserEntity extends AbstractEntity {
