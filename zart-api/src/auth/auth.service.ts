@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ConflictException,
   Injectable,
   NotFoundException,
   UnauthorizedException,
@@ -31,6 +32,9 @@ export class AuthService {
       await user.save();
       return this.signToken(user.id, user.email);
     } catch (e) {
+      if (e.code === '23505') {
+        throw new ConflictException('Credentials alredy exists!');
+      }
       throw e;
     }
   }
