@@ -19,26 +19,23 @@ export class LocationsController {
 
   @Post()
   create(@Body() dto: createLocationsDto): Promise<LocationEntity> {
-    const data = this.locationService.create(dto);
-    return data;
+    return this.locationService.create(dto);
   }
 
   @Get(':city')
   find(@Param('city') city: string) {
-    const data = this.locationService.findByCity(city);
-    return data;
+    return this.locationService.findByCity(city);
   }
 
   @Get()
   findAll(): Promise<LocationEntity[]> {
-    const data = this.locationService.findAll();
-    return data;
+    return this.locationService.findAll();
   }
 
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body()  dto: updateLocationsDto,
+    @Body() dto: updateLocationsDto,
   ) {
     this.locationService.update(id, dto);
     return { status: `Successfuly updated city: ${dto.city}` };
