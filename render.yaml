@@ -1,0 +1,50 @@
+services:
+  # Web service
+  - type: web
+    name: zart
+    env: docker
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: POSTGRES_HOST
+        fromService:
+          type: postgres
+          name: zart-db
+          property: host
+      - key: POSTGRES_PORT
+        fromService:
+          type: postgres
+          name: zart-db
+          property: port
+      - key: POSTGRES_USER
+        fromService:
+          type: postgres
+          name: zart-db
+          property: user
+      - key: POSTGRES_PASSWORD
+        fromService:
+          type: postgres
+          name: zart-db
+          property: password
+      - key: POSTGRES_DB
+        fromService:
+          type: postgres
+          name: zart-db
+          property: database
+      - key: JWT_SECRET
+        value: rX7pL9qK3mF1bN4sT6wY8zC2vA5hJ0eD
+      - key: GOOGLE_CLIENT_ID
+        value: 299469207929-bbhunpft9bfr9gk207m0s0i99a4docm7.apps.googleusercontent.com
+      - key: GOOGLE_CLIENT_SECRET
+        value: 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
+      - key: GOOGLE_CALLBACK_URL
+        value: https://zart.onrender.com/v1/auth/google/redirect
+
+  # Database service
+  - type: postgres
+    name: zart-db
+    ipAllowList: []
+    plan: free
+    maxmemoryPolicy: noeviction
+    env: postgres
+    user: zart-api
+    database: zart-postgresdb
