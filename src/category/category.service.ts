@@ -26,7 +26,7 @@ export class CategoryService {
 
   async updateCategory(id: number, updateCategoryDto: UpdateCategoryDto): Promise<Category> {
     const category = await this.categoryRepository.preload({
-      id: id,
+      id,
       ...updateCategoryDto,
     });
     
