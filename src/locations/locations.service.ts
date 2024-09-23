@@ -14,16 +14,16 @@ import { updateLocationsDto } from 'src/dto';
 export class LocationsService {
   constructor(
     @InjectRepository(LocationEntity)
-    private readonly locationRepo: Repository<LocationEntity>,
+    private readonly locationRepo: Repository<LocationEntity>
   ) {}
 
-  async create(dto: createLocationsDto): Promise<LocationEntity> {
+  async createlocation(dto: createLocationsDto): Promise<LocationEntity> {
     const location = this.locationRepo.create(dto);
     await location.save();
     return location;
   }
 
-  async findAll(): Promise<LocationEntity[]> {
+  async findAllLocations(): Promise<LocationEntity[]> {
     const data = await this.locationRepo.find();
     if (data.length === 0) {
       throw new HttpException('No Content!', HttpStatus.NO_CONTENT);
@@ -37,20 +37,19 @@ export class LocationsService {
     return data;
   }
 
-  async update(id: number, dto: updateLocationsDto) {
-    const data = await this.locationRepo.update(id, dto);
-
-    if (data.affected === 0) {
-      throw new NotFoundException('Location not found!');
+  async updateLocation(id: number, dto: updateLocationsDto) {
+    const location = await this.locationRepo.preload({
+      id,
+      ...dto,
+    });
+    if (!location) {
+      throw new NotFoundException(`Location with id ${id} not found!`);
     }
-    return data;
+    return this.locationRepo.save(location);
   }
 
-  async delete(id: number) {
-    const data = await this.locationRepo.delete(id);
-    if (data.affected === 0) {
-      throw new NotFoundException('Location not found!');
-    }
+  async deleteLocation(id: number) {
+    await this.locationRepo.delete(id);
     return { status: `Successfully deleted city with id: ${id}` };
   }
 }

@@ -19,7 +19,7 @@ export class LocationsController {
 
   @Post()
   create(@Body() dto: createLocationsDto): Promise<LocationEntity> {
-    return this.locationService.create(dto);
+    return this.locationService.createlocation(dto);
   }
 
   @Get(':city')
@@ -29,20 +29,19 @@ export class LocationsController {
 
   @Get()
   findAll(): Promise<LocationEntity[]> {
-    return this.locationService.findAll();
+    return this.locationService.findAllLocations();
   }
 
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() dto: updateLocationsDto,
+    @Body() dto: updateLocationsDto
   ) {
-    this.locationService.update(id, dto);
-    return { status: `Successfuly updated city: ${dto.city}` };
+    return this.locationService.updateLocation(id, dto);
   }
 
   @Delete(':id')
   delete(@Param('id', ParseIntPipe) id: number) {
-    return this.locationService.delete(id);
+    return this.locationService.deleteLocation(id);
   }
 }
