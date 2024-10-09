@@ -4,7 +4,7 @@ services:
   zart:
     build: .
     ports:
-      - '3000:3000'
+      - "3000:3000"
     depends_on:
       - db
     environment:
@@ -19,7 +19,7 @@ services:
       GOOGLE_CALLBACK_URL: http://localhost:3010/v1/auth/google/redirect
 
   db:
-    image: postgres
+    image: postgres:16
     restart: always
     environment:
       POSTGRES_USER: zart-api
