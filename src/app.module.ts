@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 // import { UsersModule } from './users/users.module';
 import { LocationsModule } from './locations/locations.module';
 import { CategoryModule } from './category/category.module';
+import { RequestModule } from './request/request.module';
 
 @Module({
   imports: [
@@ -27,12 +28,13 @@ import { CategoryModule } from './category/category.module';
         autoLoadEntities: true,
         synchronize: true,
         dropSchema: true,
-        // logging: true,
+        logging: ['query', 'error', 'schema'],
       }),
     }),
     AuthModule,
     LocationsModule,
     CategoryModule,
+    RequestModule,
     // UsersModule,
   ],
   controllers: [AppController],
