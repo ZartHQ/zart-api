@@ -1,3 +1,4 @@
+import { PartialType } from '@nestjs/mapped-types';
 import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
 
 export class createLocationsDto {
@@ -9,3 +10,5 @@ export class createLocationsDto {
   @IsNotEmpty()
   active: boolean;
 }
+
+export class updateLocationsDto extends PartialType(createLocationsDto) {}

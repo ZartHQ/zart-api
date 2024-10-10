@@ -1,5 +1,4 @@
 export * from './signup.dto';
 export * from './signin.dto';
 export * from './category.dto';
-export * from './createLocations.dto';
-export * from './updateLocations.dto';
+export * from './locations.dto';
