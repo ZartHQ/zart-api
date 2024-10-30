@@ -11,7 +11,9 @@ import {
 import { AuthService } from './auth.service';
 import { AuthGuard } from '@nestjs/passport';
 import { SigninDto, SignupDto } from 'src/dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -28,7 +30,7 @@ export class AuthController {
   }
 
   /***
-   * sign up using google 
+   * sign up using google
    * url http://localhost:3010/v1/auth/google
    */
   @Get('google')
@@ -38,7 +40,7 @@ export class AuthController {
   /**
    * sign up using google redirect
    * url http://localhost:3010/v1/auth/google/redirect
-   * @param req 
+   * @param req
    * @returns {user, token} token: access and refresh token
    */
 
@@ -53,9 +55,9 @@ export class AuthController {
   /**
    * post refreshToken
    * url http://localhost:3010/v1/auth/refresh
-   * 
-   * @param refreshToken 
-   * @returns token: string 
+   *
+   * @param refreshToken
+   * @returns token: string
    */
   @Post('refresh')
   async refreshToken(@Body('token') refreshToken: string) {
