@@ -1,5 +1,6 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
+// import { PartialType } from '@nestjs/mapped-types';
+import { PartialType } from "@nestjs/swagger";
+import { IsBoolean, IsNotEmpty, IsString } from "class-validator";
 
 export class createLocationsDto {
   @IsString()

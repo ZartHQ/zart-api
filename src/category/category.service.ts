@@ -8,36 +8,36 @@ import { Repository } from "typeorm";
 export class CategoryService {
   constructor(
     @InjectRepository(Category)
-    private categoryRepository: Repository<Category>
+    private categoryRepo: Repository<Category>
   ) {}
 
-  addCategory(createCategoryDto: CreateCategoryDto): Promise<Category> {
-    const category = this.categoryRepository.create(createCategoryDto);
-    return this.categoryRepository.save(category);
+  addCategory(dto: CreateCategoryDto): Promise<Category> {
+    const category = this.categoryRepo.create(dto);
+    return this.categoryRepo.save(category);
   }
 
   findAllCategories(): Promise<Category[]> {
-    return this.categoryRepository.find();
+    return this.categoryRepo.find();
   }
 
-  findOneCategory(id: number): Promise<Category> {
-    return this.categoryRepository.findOneBy({ id });
+  async findOneCategory(id: number): Promise<Category> {
+    return await this.categoryRepo.findOneBy({ id });
   }
 
-  async updateCategory(id: number, updateCategoryDto: UpdateCategoryDto): Promise<Category> {
-    const category = await this.categoryRepository.preload({
+  async updateCategory(id: number, dto: UpdateCategoryDto): Promise<Category> {
+    const category = await this.categoryRepo.preload({
       id,
-      ...updateCategoryDto,
+      ...dto,
     });
-    
+
     if (!category) {
-      throw new NotFoundException(`Category with ID ${id} not found`);
+      throw new NotFoundException(`Category with ID: ${id} not found!`);
     }
-    
-    return this.categoryRepository.save(category);
+
+    return this.categoryRepo.save(category);
   }
 
   async deleteCategory(id: number): Promise<void> {
-    await this.categoryRepository.delete(id);
+    await this.categoryRepo.delete(id);
   }
 }

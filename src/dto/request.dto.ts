@@ -1,22 +1,13 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsString } from "class-validator";
+// import { PartialType } from '@nestjs/mapped-types';
+import { PartialType } from "@nestjs/swagger";
 
-export class CreateRequestDto {
-  @IsNotEmpty()
-  @IsNumber()
-  budget: number;
-
-  @IsNotEmpty()
+export class createRequestDto {
   @IsString()
-  selectedDate: string;
+  selectedDate: string; // 2024-03-15
 
-  @IsNotEmpty()
   @IsString()
-  startTime: string;
-
-  @IsNotEmpty()
-  @IsString()
-  endTime: string;
+  selectedTimeSlot: string; // 09:00 am to 10:00 am
 }
 
-export class UpdateRequestDto extends PartialType(CreateRequestDto) {}
+export class updateRequestDto extends PartialType(createRequestDto) {}

@@ -1,20 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { AbstractEntity } from './abstract-entity';
+import { AbstractEntity } from "src/entities/abstract-entity";
+import { Entity, Column } from "typeorm";
 
 @Entity()
 export class RequestEntity extends AbstractEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  budget: number;
-
-  @Column({ type: 'date' })
+  @Column({ type: "date" })
   selectedDate: string;
 
-  @Column({ type: 'time' })
-  startTime: string;
-
-  @Column({ type: 'time' })
-  endTime: string;
+  @Column()
+  selectedTimeSlot: string;
 }
