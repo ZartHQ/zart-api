@@ -16,7 +16,7 @@ services:
       JWT_SECRET: rX7pL9qK3mF1bN4sT6wY8zC2vA5hJ0eD
       GOOGLE_CLIENT_ID: 299469207929-bbhunpft9bfr9gk207m0s0i99a4docm7.apps.googleusercontent.com
       GOOGLE_CLIENT_SECRET: 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
-      GOOGLE_CALLBACK_URL: http://localhost:3010/v1/auth/google/redirect
+      GOOGLE_CALLBACK_URL: http://zart.eu-west-2.elasticbeanstalk.com/v1/auth/google/redirect
 
   db:
     image: postgres:16
