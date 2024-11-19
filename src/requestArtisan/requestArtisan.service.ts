@@ -5,24 +5,26 @@ import {
   NotFoundException,
 } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { createRequestDto, updateRequestDto } from "src/dto";
-import { RequestEntity } from "src/entities/request.entity";
+import { createRequestArtisanDto, updateRequestArtisanDto } from "src/dto";
+import { RequestArtisanEntity } from "src/entities/requestArtisan.entity";
 import { Repository } from "typeorm";
 
 @Injectable()
 export class RequestService {
   constructor(
-    @InjectRepository(RequestEntity)
-    private readonly requestRepo: Repository<RequestEntity>
+    @InjectRepository(RequestArtisanEntity)
+    private readonly requestRepo: Repository<RequestArtisanEntity>
   ) {}
 
-  async createRequest(dto: createRequestDto): Promise<RequestEntity> {
+  async createRequest(
+    dto: createRequestArtisanDto
+  ): Promise<RequestArtisanEntity> {
     const request = this.requestRepo.create(dto);
     await request.save();
     return request;
   }
 
-  async findAllRequests(): Promise<RequestEntity[]> {
+  async findAllRequests(): Promise<RequestArtisanEntity[]> {
     const data = await this.requestRepo.find();
     if (data.length === 0) {
       throw new HttpException("No Content!", HttpStatus.NO_CONTENT);
@@ -30,7 +32,7 @@ export class RequestService {
     return data;
   }
 
-  async findById(id: number): Promise<RequestEntity> {
+  async findById(id: number): Promise<RequestArtisanEntity> {
     const data = await this.requestRepo.findOneBy({ id });
     if (!data) {
       throw new NotFoundException(`Request with id ${id} not found!`);
@@ -40,8 +42,8 @@ export class RequestService {
 
   async updateRequest(
     id: number,
-    dto: updateRequestDto
-  ): Promise<RequestEntity> {
+    dto: updateRequestArtisanDto
+  ): Promise<RequestArtisanEntity> {
     const request = await this.requestRepo.preload({
       id,
       ...dto,

@@ -7,7 +7,7 @@ import { AuthModule } from "./auth/auth.module";
 // import { UsersModule } from './users/users.module';
 import { LocationsModule } from './locations/locations.module';
 import { CategoryModule } from './category/category.module';
-import { RequestModule } from './request/request.module';
+import { RequestArtisanModule } from './requestArtisan/requestArtisan.module';
 
 @Module({
   imports: [
@@ -34,7 +34,7 @@ import { RequestModule } from './request/request.module';
     AuthModule,
     LocationsModule,
     CategoryModule,
-    RequestModule,
+    RequestArtisanModule,
     // UsersModule,
   ],
   controllers: [AppController],

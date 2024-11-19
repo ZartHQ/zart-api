@@ -8,18 +8,18 @@ import {
   Patch,
   Post,
 } from "@nestjs/common";
-import { RequestService } from "./request.service";
-import { createRequestDto, updateRequestDto } from "src/dto";
-import { RequestEntity } from "src/entities/request.entity";
+import { RequestService } from "./requestArtisan.service";
+import { createRequestArtisanDto, updateRequestArtisanDto } from "src/dto";
+import { RequestArtisanEntity } from "src/entities/requestArtisan.entity";
 import { ApiOperation } from "@nestjs/swagger";
 
 @Controller("request")
-export class RequestController {
+export class RequestArtisanController {
   constructor(private readonly requestService: RequestService) {}
 
   @Post()
   @ApiOperation({ summary: "Create Request" })
-  create(@Body() dto: createRequestDto): Promise<RequestEntity> {
+  create(@Body() dto: createRequestArtisanDto): Promise<RequestArtisanEntity> {
     return this.requestService.createRequest(dto);
   }
 
@@ -37,7 +37,10 @@ export class RequestController {
 
   @Patch(":id")
   @ApiOperation({ summary: "Update Request By Id" })
-  update(@Param("id", ParseIntPipe) id: number, @Body() dto: updateRequestDto) {
+  update(
+    @Param("id", ParseIntPipe) id: number,
+    @Body() dto: updateRequestArtisanDto
+  ) {
     return this.requestService.updateRequest(id, dto);
   }
 
