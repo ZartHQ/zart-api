@@ -13,7 +13,7 @@ import { createRequestArtisanDto, updateRequestArtisanDto } from "src/dto";
 import { RequestArtisanEntity } from "src/entities/requestArtisan.entity";
 import { ApiOperation } from "@nestjs/swagger";
 
-@Controller("request")
+@Controller("requestArtisan")
 export class RequestArtisanController {
   constructor(private readonly requestService: RequestService) {}
 
