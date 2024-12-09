@@ -9,3 +9,7 @@ export class createLocationsDto {
   @IsNotEmpty()
   active: boolean;
 }
+
+// import { PartialType } from '@nestjs/mapped-types';
+import { PartialType } from '@nestjs/swagger';
+export class updateLocationsDto extends PartialType(createLocationsDto) {}
